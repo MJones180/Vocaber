@@ -1,0 +1,173 @@
+.default-container {
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #AAA;
+  box-shadow: 0px 0px 8px 1px #AAA;
+  margin-top: 25px;
+}
+
+.default-title {
+  line-height: 45px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #474747;
+  border-bottom: 1px solid #AAA;
+}
+
+#actions-holder--addnew {
+  padding-right: 15px;
+}
+
+#actions-holder--search {
+  padding-left: 15px;
+}
+
+#action-button--addnew,
+#action-button--search {
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #AAA;
+  box-shadow: 0px 0px 8px 1px #AAA;
+  line-height: 45px;
+  text-align: center;
+  color: #005be6;
+  font-size: 15px;
+  margin-top: 25px;
+}
+
+#action-button--addnew:hover,
+#action-button--search:hover {
+  background-color: #005be6;
+  border: 1px solid #005be6;
+  cursor: pointer;
+  color: white;
+}
+
+#additem-container {
+  display: none;
+}
+
+#addnew-contents {
+	background-color: #F2F2F2;
+}
+
+#addnew-title {
+  line-height: 30px;
+  color: #474747;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.addnew-words--input {
+  border-radius: 0px;
+  border: 1px solid #CCC;
+  line-height: 28px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #777;
+}
+
+.addnew-words--input:hover {
+  border: 1px solid #AAA;
+}
+
+.addnew-words--input:focus {
+  border: 1px solid #005be6;
+}
+
+#addnew-words--add {
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #AAA;
+  line-height: 35px;
+  text-align: center;
+  color: #005be6;
+  font-size: 15px;
+}
+
+#addnew-words--add:hover {
+  background-color: #005be6;
+  border: 1px solid #005be6;
+  cursor: pointer;
+  color: white;
+}
+
+#addnew-meaning {
+  border-radius: 0px;
+  border: 1px solid #CCC;
+  padding: 10px;
+  color: #777;
+  resize: none;
+  height: 115px;
+}
+
+#addnew-meaning:hover {
+  border: 1px solid #AAA;
+}
+
+#addnew-meaning:focus {
+  border: 1px solid #005be6;
+}
+
+#addnew-button {
+  line-height: 45px;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #AAA;
+  border-radius: 3px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #777;
+}
+
+#addnew-button:hover {
+  border: 1px solid #005be6;
+  color: #005be6;
+  cursor: pointer;
+}
+
+#dictionary-item--holder {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.dictionary-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.dictionary-item:nth-child(odd) {
+  background-color: #F3F3F3;
+}
+
+.dictionary-item:nth-child(even) {
+  background-color: #E9E9E9;
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+}
+
+.dictionary-item:hover {
+  background-color: #F4FBFF;
+  cursor: pointer;
+}
+
+.dictionary-item--word {
+  color: #005be6;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.dictionary-item--meaning {
+  color: #777;
+  font-size: 12px;
+}
+
+#dictionary-info {
+  color: #474747;
+  font-size: 14px;
+  border-top: 1px solid #AAA;
+  padding: 15px;
+}

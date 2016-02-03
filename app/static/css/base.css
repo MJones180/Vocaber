@@ -1,3 +1,32 @@
+#loading_background {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: #474747;
+	z-index: 100;
+	opacity: .5;
+}
+
+#loading_text {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	text-shadow: 2px 2px #474747;
+	font-size: 50px;
+	z-index: 101;
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	top: calc(50% - 25px);
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	cursor: default;
+}
+
 #body {
 	background-color: #F2F2F2;
 }
@@ -134,8 +163,12 @@
 }
 
 #footer {
-	height: 80px;
-	width: 100%;
+	height: auto;
+	line-height: 40px;
 	background-color: #777;
-	line-height: 80px;
+	border-top: 1px solid #474747;
+	color: white;
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
 }

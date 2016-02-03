@@ -1,34 +1,6 @@
 {% extends "extends/base.html" %}
 
 {% block content %}
-<!-- <br>--------------------<br>
-User Objects: {{data2}}
-{% for i in data2 %}
-	<br>
-	 - User ID: {{i.id}}
-	 | User Email: {{i.email}}
-	 | User Username: {{i.username}}
-{% endfor %}
-<br>--------------------<br>
-Weather Objects: {{data}}
-{% for i in data %}
-	<br>
-	 - Weather User Object (Relational Mapping): {{i.user}}
-	<br>
-	 - Weather User Email (Relational Mapping):{{i.user.email}}
-	<br>
-	 - Weather User ID: {{i.user_id}}
-	<br>
-	 - Weather ID: {{i.id}}
-{% endfor %}
-<br>--------------------<br>
-Raw Zipcodes: {{ zipcodes }}
-<br>--------------------<br> -->
-
-
-
-
-
 
 <div id="settings-holder" class="x-grid-12 nopad">
 	<div id="settings-box" class="x-grid-a nopad">
@@ -62,14 +34,14 @@ Raw Zipcodes: {{ zipcodes }}
 					<span></span>
 				</label>
 				<div class="settings-item--info x-grid-a nopad">
-					Disable Card animation
+					Disable animation
 				</div>
 			</div>
 
 			<div class="settings-item--holder x-grid-a nopad" name="disable_animation_speed">
 				<input class="settings-input x-grid-a nopad" type="text" name="animation_speed" maxlength="1" value="2">
 				<div class="settings-item--info x-grid-a nopad">
-					Animation speed (seconds)
+					Animation speed, unit = 1/2 sec
 				</div>
 			</div>
 
@@ -102,7 +74,7 @@ Raw Zipcodes: {{ zipcodes }}
 </div>
 
 <div id="next_button" class="x-grid-12 s-grid-8 s-grid-offset-2 m-grid-6 m-grid-offset-3 nopad">
-	...
+	Load First Card
 </div>
 <div id="next_button-info" class="x-grid-12">
 	or hit enter

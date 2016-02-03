@@ -1,6 +1,6 @@
 <html>
 <head>
-	{% if title %} <title>{{ title }} - Vocab</title>
+	{% if title %} <title>Vocab {{ title }}</title>
 	{% else %} <title>Vocab</title>
 	{% endif %}
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/framework.css') }}"/>
@@ -12,6 +12,8 @@
 	<script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}" type="text/javascript"> </script>
 </head>
 <body>
+	<div id="loading_background"></div>
+	<div id="loading_text">Loading</div>
 	<div id="body_fix"></div>
 	<div id="body" class="x-grid-12 nopad">
 	<div id="wrapper" class="x-grid-12 nopad">
@@ -35,7 +37,7 @@
 						Review
 					</div>
 				</a>
-				<a href="{{ url_for('review') }}">
+				<a href="{{ url_for('dictionary') }}">
 					<div class="header-item x-grid-12 m-grid-a">
 						Dictionary
 					</div>
@@ -51,7 +53,7 @@
 			{% block content %}{% endblock %}
 		</div>
 		<div id="footer" class="x-grid-12">
-			Footer
+			Copyright © 2016 Vocab. All Rights Reserved.
 		</div>
 	</div>
 	</div>
@@ -62,6 +64,11 @@
 
 $("#header-hamburger").click(function() {
 	$("#header-items").toggle();
+});
+
+$(document).ready(function() {
+	$("#loading_background").toggle();
+	$("#loading_text").toggle();
 });
 
 </script>

@@ -2,11 +2,14 @@
 synonyms_first = false;
 meaning_first = false;
 disable_animation = false;
-animation_speed = 2000;
+animation_speed = 1000;
 disable_scroll = false;
 
 //Variables - Internal
 phase = "load";
+words = "";
+single_word = "";
+meaning = "";
 allow_finish = true;
 
 //Check for setting changes
@@ -24,12 +27,12 @@ $("[name=disable_animation]").change(function() {
 	}
 	else {
 		var input = $("[name=animation_speed]").val();
-		animation_speed = input.length != 1 || !$.isNumeric(input) ? 2000 : input * 1000;
+		animation_speed = input.length != 1 || !$.isNumeric(input) ? 1000 : input * 1000 / 2;
 	}
 });
 $("[name=animation_speed]").keyup(function() {
 	var input = $(this).val();
-	animation_speed = input.length != 1 || !$.isNumeric(input) ? 2000 : input * 1000;
+	animation_speed = input.length != 1 || !$.isNumeric(input) ? 1000 : input * 1000 / 2;
 });
 $("[name=disable_scroll]").change(function() {
 	disable_scroll = $(this).is(":checked") ? true : false;
@@ -59,6 +62,18 @@ function card_effect() {
 	if (disable_animation != true) {
 		$("#card-holder").animate({"top": 0 - $(this).outerHeight() - 25, "opacity": .5}, animation_speed / 2);
 		$("#card-holder").animate({"top": 0, "opacity": 1}, animation_speed / 2);
+		$("#next_button").animate({deg: 180}, {
+			step: function(now) {
+				$(this).css("transform", "rotateX(" + now + "deg)");
+			},
+			duration: animation_speed / 2
+		});
+		$("#next_button").animate({deg: 360}, {
+			step: function(now) {
+				$(this).css("transform", "rotateX(" + now + "deg)");
+			},
+			duration: animation_speed / 2
+		});
 	}
 	if (disable_scroll != true) {
 		setTimeout(function() {
@@ -84,26 +99,55 @@ function card_finish(words,meaning) {
 	$("#next_button").text("Next Card");
 }
 
-function contents(current_phase) {
+//Internal, Data
+function call_card() {
+	if (phase == "load") {
+		synonyms_first ? card_load(words,meaning) : card_load(single_word,meaning);
+	}
+	else {
+		card_finish(words,meaning);
+	}
+	phase = phase == "load" ? "finish" : "load";
+}
+
+function grab_data() {
+	var return_single_word = synonyms_first == false ? "true" : "false";
+	$.ajax({
+		url: "/vocab/grab",
+		type: "GET",
+		data: {
+			single_word_value : return_single_word
+		},
+		success: function(resp) {
+			words = resp["words"];
+			single_word = return_single_word == "true" ? resp["single_word"] : "";
+			meaning = resp["meaning"];
+			call_card();
+		},
+		error: function(err) {
+			console.log("vocab/grab error: " + err);
+		}
+	})
+}
+
+function controller() {
 	if (allow_finish) {
-		if (current_phase == "load") {
+		if (phase == "load") {
 			allow_finish = false;
-			card_load("Obsolete","No longer in use; outmoded in design or style");
-			phase = "finish";
+			grab_data();
 		}
 		else {
-			card_finish("Obsolete, Archaic, Antiquated","No longer in use; outmoded in design or style");
-			phase = "load";
+			call_card();
 		}
 	}
 }
 
 $("#next_button").click(function() {
-	contents(phase);
+	controller();
 });
 
 $(document).keyup(function(e) {
 	if (e.keyCode == 13) {
-		contents(phase);
+		controller();
 	}
 });
