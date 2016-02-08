@@ -62,6 +62,59 @@ def add_vocab():
 	# Return the Meaning ID
 	return str(m.id)
 
+@app.route('/vocab/edit')
+def edit_vocab():
+	# The params
+	word_list = request.args.get('words')
+	meaning_text = request.args.get('meaning')
+	item_id = request.args.get('item_id')
+
+	word_list = json.loads(word_list)
+
+	# Edit the meaning
+	m = Meaning.query.filter_by(id=item_id).first()
+	m.m_text = meaning_text
+
+	# Delete the words
+	words_to_delete = Word.query.filter_by(link_id=m.id).all()
+	deleted_word_count = 0
+	for w in words_to_delete:
+		db.session.delete(w)
+		deleted_word_count += 1
+
+	# Add the words
+	for word in word_list:
+		w = Word(link_id=m.id,w_text=word)
+		db.session.add(w)
+
+	# Finalize the changes
+	db.session.commit()
+
+	# Return the number of deleted words
+	return str(deleted_word_count)
+
+@app.route('/vocab/delete')
+def delete_vocab():
+	# The params
+	item_id = request.args.get('item_id')
+
+	# Delete the words
+	words_to_delete = Word.query.filter_by(link_id=item_id).all()
+	total_words = 0
+	for w in words_to_delete:
+		db.session.delete(w)
+		total_words += 1
+
+	# Delete the meaning
+	m = Meaning.query.filter_by(id=item_id).first()
+	db.session.delete(m)
+	
+	# Finalize the changes
+	db.session.commit()
+
+	# Return total words
+	return str(total_words)
+
 @app.route('/vocab/grab')
 def get_vocab():
 	# The params
@@ -81,8 +134,8 @@ def get_vocab():
 
 	# Add all of the data to a dictionary
 	data = {}
-	data["words"] = word_string;
-	data["meaning"] = rand_m.m_text;
+	data["words"] = word_string
+	data["meaning"] = rand_m.m_text
 
 	# Return single word if needed
 	if (single_word_value == "true"):

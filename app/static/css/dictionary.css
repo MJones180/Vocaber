@@ -43,22 +43,38 @@
   color: white;
 }
 
-#additem-container {
+#additem-container,
+#edititem-container {
   display: none;
 }
 
-#addnew-contents {
-	background-color: #F2F2F2;
+.itembox-hide {
+  float: right;
+  margin-top: -46px;
+  line-height: 45px;
+  color: #AAA;
+  font-size: 18px;
 }
 
-#addnew-title {
+.itembox-hide:hover {
+  cursor: pointer;
+  background-color: #AAA;
+  color: white;
+}
+
+.itembox-contents {
+  background-color: #F2F2F2;
+  padding-bottom: 15px;
+}
+
+.itembox-title {
   line-height: 30px;
   color: #474747;
   font-size: 14px;
   font-style: italic;
 }
 
-.addnew-words--input {
+.itembox-words--input {
   border-radius: 0px;
   border: 1px solid #CCC;
   line-height: 28px;
@@ -68,15 +84,15 @@
   color: #777;
 }
 
-.addnew-words--input:hover {
+.itembox-words--input:hover {
   border: 1px solid #AAA;
 }
 
-.addnew-words--input:focus {
+.itembox-words--input:focus {
   border: 1px solid #005be6;
 }
 
-#addnew-words--add {
+.itembox-words--add {
   background-color: white;
   border-radius: 3px;
   border: 1px solid #AAA;
@@ -86,14 +102,14 @@
   font-size: 15px;
 }
 
-#addnew-words--add:hover {
+.itembox-words--add:hover {
   background-color: #005be6;
   border: 1px solid #005be6;
   cursor: pointer;
   color: white;
 }
 
-#addnew-meaning {
+.itembox-meaning {
   border-radius: 0px;
   border: 1px solid #CCC;
   padding: 10px;
@@ -102,19 +118,18 @@
   height: 115px;
 }
 
-#addnew-meaning:hover {
+.itembox-meaning:hover {
   border: 1px solid #AAA;
 }
 
-#addnew-meaning:focus {
+.itembox-meaning:focus {
   border: 1px solid #005be6;
 }
 
-#addnew-button {
+.itembox-button {
   line-height: 45px;
   background-color: white;
   margin-top: 10px;
-  margin-bottom: 15px;
   border: 1px solid #AAA;
   border-radius: 3px;
   font-size: 15px;
@@ -123,10 +138,21 @@
   color: #777;
 }
 
-#addnew-button:hover {
+.itembox-button:hover {
   border: 1px solid #005be6;
   color: #005be6;
   cursor: pointer;
+}
+
+#delete-button--confirm {
+  border: 1px solid #FF1A1A;
+  color: #FF1A1A;
+  display: none;
+}
+
+#delete-button--confirm:hover {
+  background-color: #FF1A1A;
+  color: white;
 }
 
 #dictionary-item--holder {
