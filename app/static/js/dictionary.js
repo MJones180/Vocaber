@@ -30,7 +30,7 @@ function update_dictionary(words, meaning, item_id, word_count) {
 
 // Display item containers
 function display_container(id) {
-	$("#edititem-container,#additem-container").hide();
+	$("#edititem-container,#additem-container,#search-container").hide();
 	$(id).show();
 	$("body, html").animate({scrollTop: $(id).offset().top - 20}, 500);
 }
@@ -61,6 +61,10 @@ $("#action-button--addnew").click(function() {
 	display_container("#additem-container");
 });
 
+$("#action-button--search").click(function() {
+	display_container("#search-container");
+});
+
 // Hide item containers
 $("#edititem-hide").click(function() {
 	$("#edititem-container").hide();
@@ -69,6 +73,10 @@ $("#edititem-hide").click(function() {
 
 $("#additem-hide").click(function() {
 	$("#additem-container").hide();
+});
+
+$("#search-hide").click(function() {
+	$("#search-container").hide();
 });
 
 // Clear item containers
@@ -84,7 +92,7 @@ function clear_item_container(type) {
 		delete_button(true);
 	}
 	$("#add" + type + "-meaning").val("");
-	$("#edititem-container,#additem-container").hide();
+	$("#edititem-container,#additem-container,#search-container").hide();
 }
 
 // Add more input boxs for words
@@ -214,6 +222,7 @@ function delete_item(item_id) {
 			item_id : item_id
 		},
 		success: function(total_words) {
+			delete dictionary[item_id];
 			$("#" + item_id).remove();
 			$("#dictionary-info--w").text(parseInt($("#dictionary-info--w").text()) - parseInt(total_words));
 			$("#dictionary-info--m").text(parseInt($("#dictionary-info--m").text()) - 1);
@@ -223,4 +232,50 @@ function delete_item(item_id) {
 			console.log("vocab/delete error: " + err);
 		}
 	})
+}
+
+// Search
+$("#search-input").keyup(function() {
+	var input_text = $("#search-input").val().trim();
+	$("#search-results").html("");
+	$("#search-results--title").hide();
+	if (input_text != "") {
+		var input_regex = new RegExp(input_text,"gi");
+		for (var item_id in dictionary) {
+			var item = dictionary[item_id];
+			for (var key in item) {
+				if ((input_regex).test(key)){
+					search_results(item_id, input_text);
+					break;
+				}
+				for (var w = 0; w < item[key].length; w++){
+					if ((input_regex).test(item[key][w])){
+						search_results(item_id, input_text);
+						break;
+					}
+				}
+			}
+		}
+	}
+});
+
+function search_results(item_id, input) {
+	$("#search-results--title").show();
+	var item = dictionary[item_id];
+	var meaning;
+	for (var m in item) {
+		meaning = m;
+	}
+	var word_string = "";
+	for (var words in item) {
+		for (var w = 0; w < item[words].length; w++){
+			word_string += w == 0 ? item[words][w] : ", " + item[words][w];
+		}
+	}
+	var bold_text = new RegExp(input,"gi");
+	meaning = meaning.replace(bold_text, function (text) { return "<b>" + text + "</b>"; });
+	word_string = word_string.replace(bold_text, function (text) { return "<b>" + text + "</b>"; });
+	$("#search-results").append(
+		'<div class="search-results--item x-grid-12 nopad"><div class="search-results--words x-grid-12">' + word_string + '</div><div class="search-results--meaning x-grid-12">' + meaning + '</div>'
+	);
 }

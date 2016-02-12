@@ -44,7 +44,8 @@
 }
 
 #additem-container,
-#edititem-container {
+#edititem-container,
+#search-container {
   display: none;
 }
 
@@ -153,6 +154,60 @@
 #delete-button--confirm:hover {
   background-color: #FF1A1A;
   color: white;
+}
+
+#search-input {
+  margin-top: 15px;
+  border: 1px solid #AAA;
+  height: 45px;
+  font-size: 16px;
+  font-style: italic;
+  color: #AAA;
+}
+
+#search-input:hover {
+  border: 1px solid #777;
+  color: #777;
+}
+
+#search-input:focus {
+  border: 1px solid #005be6;
+  color: #474747;
+  box-shadow: 0px 0px 8px 1px #CCC;
+}
+
+#search-results {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+#search-results--title {
+  border-bottom: 1px solid #AAA;
+  display: none;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #777;
+  font-size: 15px;
+}
+
+.search-results--item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #AAA;
+}
+
+.search-results--words {
+  color: #005be6;
+  background-color: #E7E7E7;
+  line-height: 25px;
+  font-size: 15px;
+  border-left: 5px solid #005be6;
+}
+
+.search-results--meaning {
+  color: #474747;
+  font-size: 13px;
+  padding-top: 5px;
 }
 
 #dictionary-item--holder {
